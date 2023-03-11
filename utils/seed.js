@@ -7,17 +7,20 @@ connection.on('error', (err) => err);
 connection.once('open', async()=> {
     console.log('connected');
 
-    await User.deletemany({});
+    await User.deleteMany({});
 
-    await Thought.deletmany({});
+    await Thought.deleteMany({});
 
     const users = [];
+    const name = getRandomName();
+    const thoughts = getRandomThoughts(1);
 
     for (let i = 0; i < 5; i ++) {
-        const thoughts = getRandomThoughts();
+        
 
-        const name = getRandomName();
-        const email = `${first}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
+        
+
+        const email = `${name}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
 
         users.push({
             name,
@@ -25,12 +28,11 @@ connection.once('open', async()=> {
             thoughts,
         })
     }
-
+    await Thought.collection.insertOne(thoughts);
+    
     await User.collection.insertMany(users);
 
-    await Thought.collection.insertOne({
 
-    })
 
     console.table(users);
     console.info('Seeding complete! 🌱');
