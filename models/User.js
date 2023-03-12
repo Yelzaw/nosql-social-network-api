@@ -3,7 +3,7 @@ const thoughtSchema = require('./Thought');
 
 const userSchema = new Schema(
     {
-        userName: {
+        username: {
             type: String,
             required: true,
             unique: true,
@@ -24,7 +24,7 @@ const userSchema = new Schema(
         friends: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Thought',
+                ref: 'User',
             }
         ],
     },

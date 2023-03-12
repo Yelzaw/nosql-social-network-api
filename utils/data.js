@@ -114,6 +114,7 @@ const names = [
   };
   const getRandomReact = () => {
     const results = [];
+    return results;
   }
   
   // Export the functions for use in seed.js

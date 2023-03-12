@@ -12,7 +12,7 @@ connection.once('open', async()=> {
     await Thought.deleteMany({});
 
     const users = [];
-    const name = getRandomName();
+    const username = getRandomName();
     const thoughts = getRandomThoughts(1);
 
     for (let i = 0; i < 5; i ++) {
@@ -20,10 +20,10 @@ connection.once('open', async()=> {
 
         
 
-        const email = `${name}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
+        const email = `${username}${Math.floor(Math.random() * (99 - 18 + 1) + 18)}`;
 
         users.push({
-            name,
+            username,
             email,
             thoughts,
         })
