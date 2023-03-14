@@ -1,13 +1,13 @@
 const { Thought, User } = require('../models');
 
 module.exports = {
-
+    //Get All Thoughts
     getThoughts(req, res) {
         Thought.find()
             .then((thoughts)=> res.json(thoughts))
             .catch((err)=> res.status(500).json(err));
     },
-
+    //Get single Thought by ID
     getSingleThought(req, res) {
         Thought.findOne({_id: req.params.thoughtId})
             .then((thought)=>
@@ -17,7 +17,7 @@ module.exports = {
             )
             .catch((err)=> res.status(500).json(err));
     },
-
+    //Create Thought
     createThought(req, res) {
         Thought.create(req.body)
             .then((thought)=> {
@@ -39,7 +39,7 @@ module.exports = {
                 res.status(500).json(err);
             });
     },
-
+    //Delete Thought by ID
     deleteThought(req, res) {
         Thought.findOneAndRemove({_id: req.params.thoughtId})
         .then((thought)=>
@@ -57,5 +57,22 @@ module.exports = {
                 : res.json({ message: 'Thought successfully deleted!'})
         )
         .catch((err)=> res.status(500).json(err));
-    }
+    },
+    //Updaet Thought by ID
+    updateThought(req, res) {
+        Thought.findOneAndUpdate(
+            {_id: req.params.thoughtId},
+            { $set: req.body},
+            { runValidators:true, new: true}
+        )
+            .then((thought)=>
+                !thought   
+                    ? res.status(404).json({ message: 'No thought with this id!'})
+                    : res.json(thought)
+            )
+            .catch((err)=> {
+                console.log(err);
+                res.status(505).json(err);
+            });
+    },
 }
