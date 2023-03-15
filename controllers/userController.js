@@ -25,7 +25,7 @@ module.exports = {
         .then((user) => res.json(user))
         .catch((err) => res.status(500).json(err));
     },
-
+    // Update user
     updateUser(req, res) {
         User.findOneAndUpdate(
             {_id: req.params.userId},
@@ -42,7 +42,7 @@ module.exports = {
                 res.status(505).json(err);
             });
     },
-
+    // Delete user
     deleteUser(req, res) {
         User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
@@ -53,7 +53,7 @@ module.exports = {
       .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
       .catch((err) => res.status(500).json(err));
     },
-
+    // Add friend
     addFriend(req, res) {
         User.findOneAndUpdate(
             {_id: req.params.userId},
@@ -67,7 +67,7 @@ module.exports = {
         )
         .catch((err)=> res.status(500).json(err));
     },
-
+    // Remove Friend
     removeFriend(req, res) {
         User.findOneAndUpdate(
             {_id: req.params.userId},
